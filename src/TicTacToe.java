@@ -3,6 +3,7 @@ public class TicTacToe {
     private static final int ROWS = 3;
     private static final int COLS = 3;
     private static String[][] board = new String[ROWS][COLS];
+    private static String currentPlayer = "X";
 
     public static void main(String[] args) {
         boolean playAgain = false;
@@ -11,7 +12,7 @@ public class TicTacToe {
         Scanner pipe = new Scanner(System.in);
         int rowMove = 0;
         int colMove = 0;
-        String currentPlayer = "X";
+
 
         clearBoard();
         do {
@@ -27,7 +28,7 @@ public class TicTacToe {
                     System.out.println("Invalid Location");
                     moveValidated = false;
                 }
-                if (currentPlayer.equals("X"))
+                if (currentPlayer.equalsIgnoreCase("X"))
                 {
                     board[rowMove][colMove] = "X";
                     currentPlayer = "O";
@@ -97,6 +98,7 @@ public class TicTacToe {
      */
     private static void clearBoard()
     {
+        currentPlayer = "X";
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 board[i][j] = " ";
