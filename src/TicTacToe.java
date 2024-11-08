@@ -109,7 +109,12 @@ public class TicTacToe {
             {
                 stillPlaying = false;
             }
-            display();
+            else
+            {
+                display();
+            }
+
+
         }while (stillPlaying);
 
     }
