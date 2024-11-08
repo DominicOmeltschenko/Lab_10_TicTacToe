@@ -4,7 +4,7 @@ public class TicTacToe {
     private static final int COLS = 3;
     private static String[][] board = new String[ROWS][COLS];
     private static String currentPlayer = "X";
-    private static boolean playAgain = false;
+    private static boolean playAgain = true;
     private static Scanner pipe = new Scanner(System.in);
     private static int currentMove = 0;
 
@@ -101,6 +101,13 @@ public class TicTacToe {
             else
             {
                 currentPlayer = "X";
+            }
+
+
+
+            if (playAgain == false)
+            {
+                stillPlaying = false;
             }
             display();
         }while (stillPlaying);
