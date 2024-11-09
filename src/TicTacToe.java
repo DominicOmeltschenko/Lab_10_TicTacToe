@@ -49,10 +49,6 @@ public class TicTacToe {
             endIf
             display()
            while(stillPlaying)
-
-
-
-
     */
 
     public static void main(String[] args) {
@@ -73,8 +69,8 @@ public class TicTacToe {
                     rowMove = SafeInput.getRangedInt(pipe, "Please type the row of your move player " + currentPlayer, 1, ROWS) - 1;
                     colMove = SafeInput.getRangedInt(pipe, "Please type the column of your move player " + currentPlayer, 1, COLS) - 1;
                     moveValidated = isValidMove(rowMove, colMove);
-
                 } while (!moveValidated);
+
 
                 if (currentPlayer.equalsIgnoreCase("X")) {
                     board[rowMove][colMove] = "X";
@@ -83,7 +79,7 @@ public class TicTacToe {
                     board[rowMove][colMove] = "O";
                     currentMove += 1;
                 }
-
+                display();
 
                 if (currentMove >= 5) {
                     if(isWin(currentPlayer))
@@ -95,9 +91,6 @@ public class TicTacToe {
                     isTie();
                     stillPlaying = false;
                 }
-
-
-
                 else
                 {
                     if (currentPlayer.equalsIgnoreCase("X")) {
@@ -105,13 +98,10 @@ public class TicTacToe {
                     } else {
                         currentPlayer = "X";
                     }
-
-                    display();
-
                 }
 
-            } while (stillPlaying);
 
+            } while (stillPlaying);
         }while (playAgain);
     }
 
@@ -197,7 +187,7 @@ public class TicTacToe {
     {
         if(isColWin(player) || isRowWin(player) || isDiagonalWin(player))
         {
-            display();
+
             System.out.println(currentPlayer + " won! Congratulations!");
             clearBoard();
             playAgain = SafeInput.getYNConfirm(pipe ,"Would you like to play again" );
@@ -277,7 +267,7 @@ public class TicTacToe {
 
 
     /*isTie()
-              display()
+
               output "It was a tie";
               output "Would you like to play again:"
               input playAgain
@@ -290,7 +280,7 @@ public class TicTacToe {
      */
     private static boolean isTie()
     {
-        display();
+
         System.out.println("The game was a tie!");
         clearBoard();
         playAgain = SafeInput.getYNConfirm(pipe ,"Would you like to play again" );
