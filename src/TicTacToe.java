@@ -63,60 +63,56 @@ public class TicTacToe {
         int rowMove = 0;
         int colMove = 0;
 
-        clearBoard();
         do {
-
-
+            clearBoard();
+            currentPlayer = "X";
             do {
-                rowMove = SafeInput.getRangedInt(pipe, "Please type the row of your move player " + currentPlayer, 1, ROWS) - 1;
-                colMove = SafeInput.getRangedInt(pipe, "Please type the column of your move player " + currentPlayer, 1, COLS) - 1;
-               moveValidated = isValidMove(rowMove, colMove);
 
-            } while (!moveValidated);
 
-            if (currentPlayer.equalsIgnoreCase("X"))
-            {
-                board[rowMove][colMove] = "X";
-                currentMove += 1;
-            }
-            else
-            {
-                board[rowMove][colMove] = "O";
-                currentMove += 1;
-            }
-            if (currentMove >= 5)
-            {
-               isWin(currentPlayer);
-            }
-            if (currentMove == 9)
-            {
-                isTie();
-            }
-            // after you play, it checks if you are x, if you are switch to o, if you aren't switch to x
+                do {
+                    rowMove = SafeInput.getRangedInt(pipe, "Please type the row of your move player " + currentPlayer, 1, ROWS) - 1;
+                    colMove = SafeInput.getRangedInt(pipe, "Please type the column of your move player " + currentPlayer, 1, COLS) - 1;
+                    moveValidated = isValidMove(rowMove, colMove);
 
-            if (currentPlayer.equalsIgnoreCase("X"))
-            {
-                currentPlayer = "O";
-            }
-            else
-            {
-                currentPlayer = "X";
-            }
+                } while (!moveValidated);
+
+                if (currentPlayer.equalsIgnoreCase("X")) {
+                    board[rowMove][colMove] = "X";
+                    currentMove += 1;
+                } else {
+                    board[rowMove][colMove] = "O";
+                    currentMove += 1;
+                }
+
+
+                if (currentMove >= 5) {
+                    if(isWin(currentPlayer))
+                    {
+                        stillPlaying = false;
+                    }
+                }
+                if (currentMove == 9) {
+                    isTie();
+                    stillPlaying = false;
+                }
 
 
 
-            if (playAgain == false)
-            {
-                stillPlaying = false;
-            }
-            else
-            {
-                display();
-            }
+                else
+                {
+                    if (currentPlayer.equalsIgnoreCase("X")) {
+                        currentPlayer = "O";
+                    } else {
+                        currentPlayer = "X";
+                    }
 
+                    display();
 
-        }while (stillPlaying);
+                }
 
+            } while (stillPlaying);
+
+        }while (playAgain);
     }
 
 
@@ -175,8 +171,8 @@ public class TicTacToe {
      */
     private static void clearBoard()
     {
-        currentMove = 0;
         currentPlayer = "X";
+        currentMove = 0;
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 board[i][j] = " ";
@@ -203,8 +199,8 @@ public class TicTacToe {
         {
             display();
             System.out.println(currentPlayer + " won! Congratulations!");
-            playAgain = SafeInput.getYNConfirm(pipe ,"Would you like to play again" );
             clearBoard();
+            playAgain = SafeInput.getYNConfirm(pipe ,"Would you like to play again" );
             return true;
         }
         return false;
@@ -296,14 +292,8 @@ public class TicTacToe {
     {
         display();
         System.out.println("The game was a tie!");
+        clearBoard();
         playAgain = SafeInput.getYNConfirm(pipe ,"Would you like to play again" );
-
-
-        if (playAgain == true)
-        {
-            clearBoard();
-            playAgain = false;
-        }
         return playAgain;
     }
 
